@@ -35,7 +35,7 @@
 | `hN_pinch_on` | 0／1 | 捏一下（拇指碰食指、其他手指張開；有防抖和遲滯） |
 | `hN_fist`、`hN_open`、`hN_point`、`hN_thumbup`、`hN_thumbdown`、`hN_victory`、`hN_iloveyou` | 0／1 | 手勢（MediaPipe 手勢分類＋門檻＋遲滯） |
 | `hN_gesture` | 0～7 | 目前的手勢編號：0 沒有、1 握拳、2 張開、3 指上、4 讚、5 倒讚、6 YA、7 I love you |
-| `h1_pinch_count`、`h1_fist_count` | 0～場景數−1 | 每捏一下／握一下 +1，循環——直接接 Switch 的 Index 換場景 |
+| `h1_pinch_count`、`h1_fist_count` | 0、1、2… | 每捏一下／握一下 +1，一直往上加（不循環）。要循環就在外面接 Count（Limit＝Loop）或 Math 取餘數，再接 Switch 的 Index |
 | `hands_both` | 0／1 | 兩隻手都在 |
 | `hands_distance` | 0～1 | 兩隻手的距離 |
 | `hands_mid_x`、`hands_mid_y` | 0～1 | 兩隻手的中點 |
@@ -53,7 +53,7 @@
 
 ## 參數
 
-平滑（秒）、防抖（秒）、捏合的最小／最大距離、捏一下的門檻、張開的最小／最大、手勢門檻（預設 0.5）、雙手距離的最小／最大、場景數、計數歸零、視覺化解析度。
+平滑（秒）、防抖（秒）、捏合的最小／最大距離、捏一下的門檻、張開的最小／最大、手勢門檻（預設 0.5）、雙手距離的最小／最大、計數歸零、視覺化解析度。
 預設值是 2026-11-24 在一台 M4 Max＋Logitech MX Brio、坐在桌前（手離鏡頭約 50–80 公分）實測校正的；你的鏡頭和距離不一樣時，看 `*_raw` 的數字調最小／最大。
 
 ## 效能建議
