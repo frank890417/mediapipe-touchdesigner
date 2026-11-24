@@ -6,8 +6,17 @@
 ## 怎麼用
 
 1. 把 `toxes/hand_features.tox` 拖進有 `MediaPipe` 和 `hand_tracking` 的那一層。
-2. 它會自己找旁邊的 `hand_tracking`（參數「hand_tracking 元件」可以改）。
-3. 用 `features_out`（CHOP）拿數字、用 `viz_out`（TOP）看畫面上的點、線、距離。
+2. 接四條線（輸入接頭由上到下）：
+   - 第 1 個：`MediaPipe` 的 `video`（TOP，攝影機畫面）
+   - 第 2 個：`hand_tracking` 的 `normalized_data`（21 個點）
+   - 第 3 個：`hand_tracking` 的 `helpers`
+   - 第 4 個：`hand_tracking` 的 `gestures`
+3. 輸出接頭由上到下：
+   - 第 1 個 `features_out`（CHOP）：所有訊號，接一個 Null 就能綁參數
+   - 第 2 個 `viz_out`（TOP）：畫面上的點、骨架、距離、角度
+   - 第 3 個 `poly_mask_out`（TOP）：雙手框出的多邊形遮罩
+   - 第 4 個 `poly_composite_out`（TOP）：合成範例
+（沒接線時，會退回去讀參數「hand_tracking 元件」「攝影機畫面」指定的元件。）
 
 ## 輸出通道（`hN` 是第幾隻手，h1、h2）
 
